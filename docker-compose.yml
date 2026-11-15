@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
     container_name: kfc-mysql
     restart: always
     environment:
