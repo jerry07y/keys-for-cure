@@ -7,10 +7,20 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Deploy Latest Code
+      - name: Deploy Latest Code & Sync Database
         run: |
           echo "Updating Keys for Cure on Linux..."
           cd ~/keys-for-cure
-          git pull origin main
+          git fetch origin main
+          git reset --hard origin/main
           sudo docker compose up -d --remove-orphans
+
+          # If database snapshot was updated, load it and migrate URLs automatically
+          if git diff --name-only HEAD@{1} HEAD 2>/dev/null | grep -q "database/backup.sql" || [ ! -f /tmp/kfc_db_initialized ]; then
+            echo "Database update detected! Importing snapshot and migrating URLs..."
+            sudo docker exec -i kfc-mysql mysql -u jerry -pJshunqi724 wordpress_db < database/backup.sql
+            sudo ./scripts/migrate-url.sh http://10.0.0.51:8080
+            touch /tmp/kfc_db_initialized
+          fi
+
           echo "Deployment complete! Site updated with 0 downtime."
