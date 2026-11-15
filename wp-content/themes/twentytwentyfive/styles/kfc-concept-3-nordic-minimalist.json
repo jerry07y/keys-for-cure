@@ -1,0 +1,216 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+	"version": 3,
+	"title": "Concept 3: Nordic Minimalist",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"color": "#F8F9FA",
+					"name": "Base (Off-White)",
+					"slug": "base"
+				},
+				{
+					"color": "#18181B",
+					"name": "Contrast (Zinc Ink)",
+					"slug": "contrast"
+				},
+				{
+					"color": "#2563EB",
+					"name": "Accent 1 (Electric Cobalt)",
+					"slug": "accent-1"
+				},
+				{
+					"color": "#09090B",
+					"name": "Accent 2 (Pitch Black)",
+					"slug": "accent-2"
+				},
+				{
+					"color": "#18181B",
+					"name": "Accent 3 (Charcoal)",
+					"slug": "accent-3"
+				},
+				{
+					"color": "#71717A",
+					"name": "Accent 4 (Muted Zinc)",
+					"slug": "accent-4"
+				},
+				{
+					"color": "#FFFFFF",
+					"name": "Accent 5 (Pure White)",
+					"slug": "accent-5"
+				},
+				{
+					"color": "#18181B1A",
+					"name": "Accent 6 (Hairline Border)",
+					"slug": "accent-6"
+				}
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"name": "Fira Sans",
+					"slug": "fira-sans",
+					"fontFamily": "\"Fira Sans\", sans-serif",
+					"fontFace": [
+						{
+							"src": ["file:./assets/fonts/fira-sans/FiraSans-Regular.woff2"],
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "\"Fira Sans\""
+						},
+						{
+							"src": ["file:./assets/fonts/fira-sans/FiraSans-Medium.woff2"],
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "\"Fira Sans\""
+						},
+						{
+							"src": ["file:./assets/fonts/fira-sans/FiraSans-SemiBold.woff2"],
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "\"Fira Sans\""
+						},
+						{
+							"src": ["file:./assets/fonts/fira-sans/FiraSans-Bold.woff2"],
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontFamily": "\"Fira Sans\""
+						}
+					]
+				},
+				{
+					"name": "Manrope",
+					"slug": "manrope",
+					"fontFamily": "Manrope, sans-serif",
+					"fontFace": [
+						{
+							"src": ["file:./assets/fonts/manrope/Manrope-VariableFont_wght.woff2"],
+							"fontWeight": "200 800",
+							"fontStyle": "normal",
+							"fontFamily": "Manrope"
+						}
+					]
+				}
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var:preset|color|base",
+			"text": "var:preset|color|contrast"
+		},
+		"typography": {
+			"fontFamily": "var:preset|font-family|fira-sans",
+			"letterSpacing": "-0.01em",
+			"lineHeight": "1.55"
+		},
+		"blocks": {
+			"core/button": {
+				"border": {
+					"radius": "0px"
+				},
+				"spacing": {
+					"padding": {
+						"bottom": "0.75rem",
+						"left": "1.75rem",
+						"right": "1.75rem",
+						"top": "0.75rem"
+					}
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|fira-sans",
+					"fontWeight": "600",
+					"letterSpacing": "0.5px"
+				}
+			},
+			"core/heading": {
+				"color": {
+					"text": "var:preset|color|contrast"
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|fira-sans",
+					"fontWeight": "700",
+					"letterSpacing": "-0.02em",
+					"lineHeight": "1.15"
+				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|fira-sans",
+					"fontWeight": "800",
+					"letterSpacing": "-0.03em"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"color": {
+					"background": "var:preset|color|contrast",
+					"text": "var:preset|color|base"
+				},
+				"border": {
+					"radius": "0px"
+				},
+				":hover": {
+					"color": {
+						"background": "var:preset|color|accent-1",
+						"text": "#FFFFFF"
+					}
+				}
+			},
+			"heading": {
+				"color": {
+					"text": "var:preset|color|contrast"
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|fira-sans"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var:preset|color|accent-1"
+				},
+				":hover": {
+					"color": {
+						"text": "var:preset|color|contrast"
+					}
+				}
+			}
+		},
+		"variations": {
+			"section-2": {
+				"color": {
+					"background": "var:preset|color|contrast",
+					"text": "var:preset|color|base"
+				},
+				"elements": {
+					"button": {
+						"color": {
+							"background": "var:preset|color|accent-1",
+							"text": "#FFFFFF"
+						},
+						":hover": {
+							"color": {
+								"background": "var:preset|color|base",
+								"text": "var:preset|color|contrast"
+							}
+						}
+					},
+					"heading": {
+						"color": {
+							"text": "var:preset|color|base"
+						}
+					}
+				}
+			},
+			"section-4": {
+				"color": {
+					"background": "var:preset|color|accent-5",
+					"text": "var:preset|color|contrast"
+				}
+			}
+		}
+	}
+}

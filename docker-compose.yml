@@ -1,0 +1,37 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: kfc-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-wordpress_db}
+      MYSQL_USER: ${DB_USER:-jerry}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-Jshunqi724}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-Jshunqi724_root}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/backup.sql:/docker-entrypoint-initdb.d/01-backup.sql:ro
+    networks:
+      - kfc-network
+  wordpress:
+    image: wordpress:6-php8.3-apache
+    container_name: kfc-web
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "${PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-wordpress_db}
+      WORDPRESS_DB_USER: ${DB_USER:-jerry}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-Jshunqi724}
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    networks:
+      - kfc-network
+volumes:
+  db_data:
+networks:
+  kfc-network:
+    driver: bridge

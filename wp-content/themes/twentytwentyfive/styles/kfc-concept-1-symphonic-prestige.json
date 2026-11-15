@@ -1,0 +1,261 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+	"version": 3,
+	"title": "Concept 1: Symphonic Prestige",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"color": "#FAF7F2",
+					"name": "Base (Ivory)",
+					"slug": "base"
+				},
+				{
+					"color": "#0B192C",
+					"name": "Contrast (Midnight Navy)",
+					"slug": "contrast"
+				},
+				{
+					"color": "#C5A059",
+					"name": "Accent 1 (Champagne Gold)",
+					"slug": "accent-1"
+				},
+				{
+					"color": "#0B192C",
+					"name": "Accent 2 (Deep Navy)",
+					"slug": "accent-2"
+				},
+				{
+					"color": "#8A7029",
+					"name": "Accent 3 (Antique Brass)",
+					"slug": "accent-3"
+				},
+				{
+					"color": "#4A5568",
+					"name": "Accent 4 (Warm Slate)",
+					"slug": "accent-4"
+				},
+				{
+					"color": "#F3EFE6",
+					"name": "Accent 5 (Warm Cream)",
+					"slug": "accent-5"
+				},
+				{
+					"color": "#0B192C26",
+					"name": "Accent 6 (Subtle Navy Border)",
+					"slug": "accent-6"
+				}
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"name": "Literata",
+					"slug": "literata",
+					"fontFamily": "Literata, serif",
+					"fontFace": [
+						{
+							"src": ["file:./assets/fonts/literata/Literata72pt-Regular.woff2"],
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Literata"
+						},
+						{
+							"src": ["file:./assets/fonts/literata/Literata72pt-Italic.woff2"],
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Literata"
+						},
+						{
+							"src": ["file:./assets/fonts/literata/Literata72pt-SemiBold.woff2"],
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Literata"
+						},
+						{
+							"src": ["file:./assets/fonts/literata/Literata72pt-Bold.woff2"],
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontFamily": "Literata"
+						}
+					]
+				},
+				{
+					"name": "Manrope",
+					"slug": "manrope",
+					"fontFamily": "Manrope, sans-serif",
+					"fontFace": [
+						{
+							"src": ["file:./assets/fonts/manrope/Manrope-VariableFont_wght.woff2"],
+							"fontWeight": "200 800",
+							"fontStyle": "normal",
+							"fontFamily": "Manrope"
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{
+					"fluid": false,
+					"name": "Small",
+					"size": "0.875rem",
+					"slug": "small"
+				},
+				{
+					"fluid": {
+						"max": "1.125rem",
+						"min": "1rem"
+					},
+					"name": "Medium",
+					"size": "1rem",
+					"slug": "medium"
+				},
+				{
+					"fluid": {
+						"max": "1.45rem",
+						"min": "1.2rem"
+					},
+					"name": "Large",
+					"size": "1.45rem",
+					"slug": "large"
+				},
+				{
+					"fluid": {
+						"max": "2.2rem",
+						"min": "1.6rem"
+					},
+					"name": "Extra Large",
+					"size": "1.8rem",
+					"slug": "x-large"
+				},
+				{
+					"fluid": {
+						"max": "3.2rem",
+						"min": "2.2rem"
+					},
+					"name": "Extra Extra Large",
+					"size": "2.5rem",
+					"slug": "xx-large"
+				}
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var:preset|color|base",
+			"text": "var:preset|color|contrast"
+		},
+		"typography": {
+			"fontFamily": "var:preset|font-family|manrope",
+			"letterSpacing": "0px",
+			"lineHeight": "1.6"
+		},
+		"blocks": {
+			"core/button": {
+				"border": {
+					"radius": "6px"
+				},
+				"spacing": {
+					"padding": {
+						"bottom": "0.75rem",
+						"left": "1.75rem",
+						"right": "1.75rem",
+						"top": "0.75rem"
+					}
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|manrope",
+					"fontWeight": "600",
+					"letterSpacing": "0.5px"
+				}
+			},
+			"core/heading": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|literata",
+					"fontWeight": "600",
+					"lineHeight": "1.2"
+				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|literata",
+					"fontWeight": "700",
+					"letterSpacing": "0.5px"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"color": {
+					"background": "var:preset|color|contrast",
+					"text": "var:preset|color|base"
+				},
+				"border": {
+					"radius": "6px"
+				},
+				":hover": {
+					"color": {
+						"background": "var:preset|color|accent-1",
+						"text": "var:preset|color|contrast"
+					}
+				}
+			},
+			"heading": {
+				"color": {
+					"text": "var:preset|color|contrast"
+				},
+				"typography": {
+					"fontFamily": "var:preset|font-family|literata"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var:preset|color|contrast"
+				},
+				":hover": {
+					"color": {
+						"text": "var:preset|color|accent-1"
+					}
+				}
+			}
+		},
+		"variations": {
+			"section-2": {
+				"color": {
+					"background": "var:preset|color|contrast",
+					"text": "var:preset|color|base"
+				},
+				"elements": {
+					"button": {
+						"color": {
+							"background": "var:preset|color|accent-1",
+							"text": "var:preset|color|contrast"
+						},
+						":hover": {
+							"color": {
+								"background": "var:preset|color|base",
+								"text": "var:preset|color|contrast"
+							}
+						}
+					},
+					"heading": {
+						"color": {
+							"text": "var:preset|color|base"
+						}
+					},
+					"link": {
+						"color": {
+							"text": "var:preset|color|accent-1"
+						}
+					}
+				}
+			},
+			"section-4": {
+				"color": {
+					"background": "var:preset|color|accent-5",
+					"text": "var:preset|color|contrast"
+				}
+			}
+		}
+	}
+}
