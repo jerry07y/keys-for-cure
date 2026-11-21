@@ -12,12 +12,22 @@ class KFC_Events_Calendar {
         // Database setup
         add_action('init', [$this, 'init_db']);
 
-        // Register shortcode
+        // Register shortcodes
         add_shortcode('kfc_event_calendar', [$this, 'render_calendar_shortcode']);
+        add_shortcode('kfc_door_scanner', [$this, 'render_scanner_shortcode']);
+
+        // Clean route for /checkin/
+        add_action('init', [$this, 'add_checkin_rewrite']);
+        add_filter('query_vars', [$this, 'add_query_vars']);
+        add_action('template_redirect', [$this, 'handle_checkin_template']);
 
         // AJAX Handlers for Registration
         add_action('wp_ajax_kfc_submit_rsvp', [$this, 'handle_submit_rsvp']);
         add_action('wp_ajax_nopriv_kfc_submit_rsvp', [$this, 'handle_submit_rsvp']);
+
+        // AJAX Handlers for Door Check-In
+        add_action('wp_ajax_kfc_door_verify', [$this, 'handle_door_verify']);
+        add_action('wp_ajax_nopriv_kfc_door_verify', [$this, 'handle_door_verify']);
     }
 
     public static function get_table_name(): string {
@@ -140,6 +150,84 @@ class KFC_Events_Calendar {
             'date_str'      => $date_str,
             'guests'        => $guests,
             'pledge'        => $pledge
+        ]);
+    }
+
+    public function add_checkin_rewrite() {
+        add_rewrite_rule('^checkin/?$', 'index.php?kfc_checkin=1', 'top');
+    }
+
+    public function add_query_vars($vars) {
+        $vars[] = 'kfc_checkin';
+        return $vars;
+    }
+
+    public function handle_checkin_template() {
+        if (get_query_var('kfc_checkin') || (isset($_GET['page']) && $_GET['page'] === 'kfc-checkin')) {
+            $this->render_standalone_scanner_page();
+            exit;
+        }
+    }
+
+    public function handle_door_verify() {
+        $pin = sanitize_text_field($_POST['pin'] ?? '');
+        $code = sanitize_text_field($_POST['code'] ?? '');
+
+        $expected_pin = get_option('kfc_door_pin', '2027');
+        if ($pin !== $expected_pin) {
+            wp_send_json_error(['message' => 'Invalid Door PIN code.']);
+            return;
+        }
+
+        if (empty($code)) {
+            wp_send_json_error(['message' => 'No scan data detected.']);
+            return;
+        }
+
+        global $wpdb;
+        $table = self::get_table_name();
+
+        // Support lookup by QR token (primary) or booking_ref (fallback)
+        $reg = $wpdb->get_row($wpdb->prepare(
+            "SELECT * FROM {$table} WHERE qr_token = %s OR booking_ref = %s",
+            $code,
+            $code
+        ));
+
+        if (!$reg) {
+            wp_send_json_error(['message' => 'INVALID PASS: Unrecognized QR code or ticket reference.']);
+            return;
+        }
+
+        if ($reg->status === 'checked_in') {
+            $checked_time = date_i18n('g:i A (d M)', strtotime($reg->checked_in_at));
+            wp_send_json_error([
+                'already'       => true,
+                'message'       => 'ALREADY CHECKED IN at ' . $checked_time,
+                'attendee_name' => $reg->attendee_name,
+                'booking_ref'   => $reg->booking_ref,
+                'guest_count'   => $reg->guest_count
+            ]);
+            return;
+        }
+
+        // Atomic check-in transition
+        $wpdb->update($table, [
+            'status'        => 'checked_in',
+            'checked_in_at' => current_time('mysql')
+        ], ['id' => $reg->id]);
+
+        $event_post = get_post($reg->event_id);
+        $event_title = $event_post ? $event_post->post_title : 'Charity Concert';
+
+        wp_send_json_success([
+            'message'         => 'ADMITTED &bull; VALID PASS',
+            'attendee_name'   => $reg->attendee_name,
+            'booking_ref'     => $reg->booking_ref,
+            'guest_count'     => $reg->guest_count,
+            'event_title'     => $event_title,
+            'donation_pledge' => (float) $reg->donation_pledge,
+            'time'            => date_i18n('g:i A')
         ]);
     }
 
@@ -400,6 +488,206 @@ class KFC_Events_Calendar {
         </div>
         <?php
         return ob_get_clean();
+    }
+
+    public function render_scanner_shortcode($atts) {
+        ob_start();
+        $this->render_standalone_scanner_page();
+        return ob_get_clean();
+    }
+
+    public function render_standalone_scanner_page() {
+        $ajax_url = admin_url('admin-ajax.php');
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+            <title>Keys for Cure &bull; Door Check-In Scanner</title>
+            <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+            <style>
+                * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+                body { background: #090d16; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+                .kfc-door-header { padding: 16px 20px; background: #0f172a; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; }
+                .kfc-door-brand { font-size: 15px; font-weight: 800; letter-spacing: 0.5px; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+                .kfc-door-badge { font-size: 10px; background: #3b82f6; color: #fff; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; }
+
+                /* PIN Screen */
+                #pinScreen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+                .pin-input { font-size: 28px; letter-spacing: 8px; text-align: center; width: 180px; padding: 12px; border-radius: 12px; border: 2px solid #334155; background: #1e293b; color: #fff; margin: 20px 0; }
+                .btn-unlock { background: #3b82f6; color: #fff; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 12px; border: none; cursor: pointer; width: 180px; }
+
+                /* Scanner Screen */
+                #scannerScreen { flex: 1; display: none; flex-direction: column; padding: 16px; max-width: 500px; margin: 0 auto; width: 100%; }
+                #reader { width: 100%; border-radius: 16px; overflow: hidden; background: #000; border: 2px solid #334155; min-height: 280px; }
+
+                .door-alert-box { margin-top: 16px; border-radius: 14px; padding: 18px; text-align: center; display: none; }
+                .door-alert-box.success { background: #064e3b; border: 2px solid #10b981; color: #ecfdf5; }
+                .door-alert-box.error { background: #7f1d1d; border: 2px solid #ef4444; color: #fef2f2; }
+                .door-alert-box.duplicate { background: #78350f; border: 2px solid #f59e0b; color: #fffbeb; }
+            </style>
+        </head>
+        <body>
+            <div class="kfc-door-header">
+                <div class="kfc-door-brand">
+                    <span>Keys for Cure</span>
+                    <span class="kfc-door-badge">Volunteer Portal</span>
+                </div>
+                <div style="font-size: 12px; color: #94a3b8;">CC63798</div>
+            </div>
+
+            <!-- PIN Unlock Screen -->
+            <div id="pinScreen">
+                <div style="font-size: 40px; margin-bottom: 12px;">🔐</div>
+                <h2 style="font-size: 20px; font-weight: 700;">Door Scanner Access</h2>
+                <p style="color: #94a3b8; font-size: 13.5px; margin-top: 6px; max-width: 280px;">
+                    Enter the 4-digit venue volunteer PIN to start the camera scanner.
+                </p>
+                <input type="password" id="doorPinInput" class="pin-input" maxlength="4" placeholder="••••" inputmode="numeric" autofocus onkeyup="if(event.key==='Enter') unlockDoorScanner()">
+                <button class="btn-unlock" onclick="unlockDoorScanner()">Unlock Scanner</button>
+                <div id="pinError" style="color: #ef4444; font-size: 12px; margin-top: 12px; display: none;">Incorrect PIN. Try again.</div>
+            </div>
+
+            <!-- Active Scanner Screen -->
+            <div id="scannerScreen">
+                <div id="reader"></div>
+
+                <div id="doorResult" class="door-alert-box">
+                    <div id="doorMsgTitle" style="font-size: 18px; font-weight: 800;">STATUS</div>
+                    <div id="doorMsgSub" style="font-size: 14px; margin-top: 4px;">Attendee details</div>
+                    <div id="doorMsgMeta" style="font-size: 12px; margin-top: 6px; opacity: 0.9;">Booking Ref</div>
+                </div>
+
+                <div id="searchWrap" style="margin-top: 16px;"></div>
+            </div>
+
+            <script>
+                var storedPin = '';
+                var html5QrcodeScanner = null;
+                var audioCtx = null;
+                var isProcessingScan = false;
+
+                function getAudioContext() {
+                    if (!audioCtx) {
+                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                    return audioCtx;
+                }
+
+                function playChime(isSuccess) {
+                    try {
+                        var ctx = getAudioContext();
+                        if (isSuccess) {
+                            var osc1 = ctx.createOscillator();
+                            var osc2 = ctx.createOscillator();
+                            var gain = ctx.createGain();
+                            osc1.type = 'sine';
+                            osc2.type = 'sine';
+                            osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
+                            osc2.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                            gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                            osc1.connect(gain);
+                            osc2.connect(gain);
+                            gain.connect(ctx.destination);
+                            osc1.start(ctx.currentTime);
+                            osc2.start(ctx.currentTime + 0.1);
+                            osc1.stop(ctx.currentTime + 0.4);
+                            osc2.stop(ctx.currentTime + 0.4);
+                        } else {
+                            var osc = ctx.createOscillator();
+                            var gain = ctx.createGain();
+                            osc.type = 'square';
+                            osc.frequency.setValueAtTime(150, ctx.currentTime);
+                            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                            osc.connect(gain);
+                            gain.connect(ctx.destination);
+                            osc.start(ctx.currentTime);
+                            osc.stop(ctx.currentTime + 0.35);
+                        }
+                    } catch(e) {}
+                }
+
+                function unlockDoorScanner() {
+                    var val = document.getElementById('doorPinInput').value.trim();
+                    if (val.length < 4) return;
+                    storedPin = val;
+                    document.getElementById('pinScreen').style.display = 'none';
+                    document.getElementById('scannerScreen').style.display = 'flex';
+                    startCameraScanner();
+                }
+
+                function startCameraScanner() {
+                    html5QrcodeScanner = new Html5Qrcode("reader");
+                    var config = { fps: 10, qrbox: { width: 240, height: 240 } };
+                    html5QrcodeScanner.start(
+                        { facingMode: "environment" },
+                        config,
+                        function onScanSuccess(decodedText) {
+                            if (isProcessingScan) return;
+                            isProcessingScan = true;
+                            verifyScannedCode(decodedText);
+                            setTimeout(function() { isProcessingScan = false; }, 2500);
+                        },
+                        function onScanFailure(error) {}
+                    ).catch(function(err) {
+                        alert("Camera permission denied or camera not available. Please allow camera access in browser.");
+                    });
+                }
+
+                function verifyScannedCode(code) {
+                    var box = document.getElementById('doorResult');
+                    var title = document.getElementById('doorMsgTitle');
+                    var sub = document.getElementById('doorMsgSub');
+                    var meta = document.getElementById('doorMsgMeta');
+
+                    var fd = new FormData();
+                    fd.append('action', 'kfc_door_verify');
+                    fd.append('pin', storedPin);
+                    fd.append('code', code);
+
+                    fetch('<?php echo esc_url($ajax_url); ?>', { method: 'POST', body: fd })
+                    .then(r => r.json())
+                    .then(res => {
+                        box.style.display = 'block';
+                        if (res.success) {
+                            playChime(true);
+                            box.className = 'door-alert-box success';
+                            title.innerText = '✅ ADMITTED';
+                            sub.innerText = res.data.attendee_name + ' (' + res.data.guest_count + ' guest' + (res.data.guest_count > 1 ? 's' : '') + ')';
+                            meta.innerText = res.data.booking_ref + ' &bull; ' + res.data.event_title + (res.data.donation_pledge > 0 ? ' &bull; Pledge: $' + res.data.donation_pledge : '');
+                        } else {
+                            playChime(false);
+                            if (res.data && res.data.already) {
+                                box.className = 'door-alert-box duplicate';
+                                title.innerText = '⚠️ DUPLICATE SCAN';
+                                sub.innerText = res.data.message;
+                                meta.innerText = res.data.attendee_name + ' &bull; ' + res.data.booking_ref;
+                            } else {
+                                box.className = 'door-alert-box error';
+                                title.innerText = '❌ INVALID PASS';
+                                sub.innerText = res.data && res.data.message ? res.data.message : 'Invalid code';
+                                meta.innerText = 'Not authorized for entry';
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        playChime(false);
+                        box.style.display = 'block';
+                        box.className = 'door-alert-box error';
+                        title.innerText = '❌ NETWORK ERROR';
+                        sub.innerText = 'Check WiFi/Cellular connection';
+                    });
+                }
+            </script>
+        </body>
+        </html>
+        <?php
     }
 }
 
