@@ -344,21 +344,21 @@ class KFC_Events_Calendar {
             <style>
                 .kfc-calendar-wrap { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 1140px; margin: 30px auto; padding: 0 16px; color: #18181b; }
                 .kfc-cal-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid #e4e4e7; padding-bottom: 16px; }
-                .kfc-cal-title { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin: 0; color: #09090b; }
-                .kfc-cal-sub { font-size: 14px; color: #71717a; margin-top: 4px; }
-                .kfc-cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-                .kfc-event-card { background: #ffffff; border: 1px solid #e4e4e7; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-                .kfc-event-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: #d4d4d8; }
-                .kfc-card-top { padding: 22px; flex: 1; display: flex; flex-direction: column; }
-                .kfc-badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 8px; }
-                .kfc-date-pill { background: #0f172a; color: #f8fafc; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 5px 12px; border-radius: 999px; text-transform: uppercase; }
-                .kfc-bene-pill { background: #ecfdf5; color: #059669; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
-                .kfc-event-heading { font-size: 19px; font-weight: 700; line-height: 1.35; margin: 0 0 10px; color: #09090b; }
-                .kfc-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #52525b; margin-bottom: 6px; }
-                .kfc-card-footer { padding: 14px 22px; background: #fafafa; border-top: 1px solid #f4f4f5; display: flex; justify-content: space-between; align-items: center; }
-                .kfc-price-label { font-size: 15px; font-weight: 800; color: #09090b; }
-                .kfc-btn-rsvp { background: #0f172a; color: #ffffff; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-                .kfc-btn-rsvp:hover { background: #27272a; color: #ffffff; }
+                .kfc-cal-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin: 0; color: #09090b; }
+                .kfc-cal-sub { font-size: 13.5px; color: #71717a; margin-top: 4px; }
+                .kfc-cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+                .kfc-event-card { background: #ffffff; border: 1px solid #e4e4e7; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.15s ease; }
+                .kfc-event-card:hover { border-color: #a1a1aa; }
+                .kfc-card-top { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+                .kfc-badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; }
+                .kfc-date-pill { background: #18181b; color: #f4f4f5; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; }
+                .kfc-bene-pill { background: #f4f4f5; color: #52525b; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+                .kfc-event-heading { font-size: 18px; font-weight: 700; line-height: 1.35; margin: 0 0 10px; color: #09090b; }
+                .kfc-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #52525b; margin-bottom: 5px; }
+                .kfc-card-footer { padding: 12px 20px; background: #fafafa; border-top: 1px solid #e4e4e7; display: flex; justify-content: space-between; align-items: center; }
+                .kfc-price-label { font-size: 14px; font-weight: 700; color: #09090b; }
+                .kfc-btn-rsvp { background: #18181b; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+                .kfc-btn-rsvp:hover { background: #3f3f46; color: #ffffff; }
 
                 /* MODAL STYLES (Elfsight Style Popup) */
                 .kfc-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 999999; display: none; align-items: center; justify-content: center; padding: 16px; }
@@ -393,7 +393,7 @@ class KFC_Events_Calendar {
                     <?php foreach ($events as $ev): ?>
                         <?php
                         $start_ts   = !empty($ev->start_date) ? strtotime($ev->start_date) : null;
-                        $date_fmt   = $start_ts ? date_i18n('M j &bull; g:i A', $start_ts) : 'Upcoming';
+                        $date_fmt   = $start_ts ? (date_i18n('M j', $start_ts) . ' &bull; ' . date_i18n('g:i A', $start_ts)) : 'Upcoming';
                         $full_date  = $start_ts ? date_i18n('l, j F Y @ g:i A', $start_ts) : 'Date TBD';
                         $venue_name = 'Takapuna Community Hall';
                         if (!empty($ev->venue_id)) {
