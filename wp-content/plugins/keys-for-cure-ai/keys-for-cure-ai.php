@@ -9,6 +9,7 @@
 if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . 'concept-layouts.php';
+require_once plugin_dir_path(__FILE__) . 'class-kfc-events-calendar.php';
 
 class KeysForCureAI {
     private const LLM_ENDPOINT = 'https://developer.amd.com.cn/radeon/api/v1/chat/completions';
