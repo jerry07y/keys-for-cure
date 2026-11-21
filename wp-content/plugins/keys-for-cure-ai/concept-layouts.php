@@ -304,152 +304,137 @@ HTML;
 HTML;
     }
 
-    private static function get_concept_3_nordic_minimalist(): string {
+    public static function get_concept_3_nordic_minimalist(): string {
         return <<<HTML
-<!-- ARCHITECTURAL MONOLITH HERO (Live Music Now & Nordoff Robbins Inspired) -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|70","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|contrast","text":"var:preset|color|base"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-color has-contrast-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--80);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--40)">
-  
-  <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"3px","textTransform":"uppercase","fontWeight":"600"}},"fontSize":"small"} -->
-  <p class="has-small-font-size" style="font-weight:600;letter-spacing:3px;text-transform:uppercase;opacity:0.75">KEYS FOR CURE &bull; CC63798 &bull; AUCKLAND, NEW ZEALAND</p>
-  <!-- /wp:paragraph -->
+<!-- CONCEPT 3: NORDIC MINIMALIST & CLINICAL HUMANISM (Nordoff & Robbins Archetype) -->
+<div class="kfc-theme-nordic" style="background:#FFFFFF; color:#18181B; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height:1.6;">
 
-  <!-- wp:heading {"level":1,"style":{"typography":{"lineHeight":"1.05","fontWeight":"900","letterSpacing":"-1px"}},"fontSize":"xx-large"} -->
-  <h1 class="wp-block-heading has-xx-large-font-size" style="line-height:1.05;font-weight:900;letter-spacing:-1px;margin-top:12px;font-size:56px">Benefit Concerts.<br>Season 2026/27.</h1>
-  <!-- /wp:heading -->
-
-  <!-- wp:paragraph {"fontSize":"medium","style":{"spacing":{"margin":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|40"}}}} -->
-  <p class="has-medium-font-size" style="margin-top:var(--wp--preset--spacing--30);margin-bottom:var(--wp--preset--spacing--40);max-width:680px;line-height:1.6;opacity:0.85">A structured classical performance series pairing Auckland's emerging youth soloists with pediatric healthcare initiatives. Zero commercial deduction. Pure philanthropic impact.</p>
-  <!-- /wp:paragraph -->
-
-  <!-- wp:buttons -->
-  <div class="wp-block-buttons">
-    <!-- wp:button {"style":{"border":{"radius":"0px"}}} -->
-    <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#calendar-index" style="border-radius:0px">View Concert Index &darr;</a></div>
-    <!-- /wp:button -->
-    <!-- wp:button {"className":"is-style-outline","style":{"border":{"radius":"0px"}}} -->
-    <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="http://localhost:8080/news/" style="border-radius:0px">News &amp; Program Notes &rarr;</a></div>
-    <!-- /wp:button -->
+  <!-- ARCHITECTURAL HERO -->
+  <div style="background:#F4F4F5; border-bottom:1px solid #E4E4E7; padding:90px 24px 80px;">
+    <div style="max-width:1040px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#0D9488;"></span>
+        <span style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0D9488;">
+          Clinical Music Therapy &bull; Pediatric Wellbeing &bull; CC63798
+        </span>
+      </div>
+      <h1 style="font-size:clamp(34px, 4.8vw, 56px); font-weight:800; line-height:1.12; color:#18181B; margin:0 0 24px; letter-spacing:-1px;">
+        The Therapeutic Science of Youth Music in Pediatric Healthcare
+      </h1>
+      <p style="font-size:clamp(17px, 2vw, 20px); line-height:1.65; color:#52525B; max-width:760px; margin:0 0 36px; font-weight:400;">
+        Keys for Cure bridges clinical healthcare at Starship Children's Hospital and youth acoustic discipline &mdash; funding bedside music therapy programs and children's mental wellbeing support across Aotearoa.
+      </p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="#schedule" style="background:#18181B; color:#FFFFFF; font-weight:600; padding:13px 28px; border-radius:6px; text-decoration:none; font-size:14px;">
+          View Concert Schedule &amp; RSVP &rarr;
+        </a>
+        <a href="#thesis" style="background:transparent; border:1px solid #D4D4D8; color:#18181B; font-weight:600; padding:13px 24px; border-radius:6px; text-decoration:none; font-size:14px;">
+          Clinical Thesis &amp; Hospital Allocations
+        </a>
+      </div>
+    </div>
   </div>
-  <!-- /wp:buttons -->
 
-</div>
-<!-- /wp:group -->
+  <!-- TWO-COLUMN CLINICAL THESIS & ALLOCATION -->
+  <div id="thesis" style="background:#FFFFFF; padding:80px 24px; border-bottom:1px solid #E4E4E7;">
+    <div style="max-width:1040px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:48px; align-items:start;">
+      <div>
+        <span style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#0D9488;">Clinical Evidence</span>
+        <h2 style="font-size:30px; font-weight:800; color:#18181B; margin:8px 0 18px; letter-spacing:-0.5px;">
+          The Science of Acoustic Engagement in Chronic Recovery
+        </h2>
+        <p style="font-size:15px; color:#52525B; line-height:1.75; margin:0 0 16px;">
+          Clinical research demonstrated at leading pediatric institutes shows that live acoustic chamber music significantly reduces cortisol levels, alleviates post-operative trauma, and accelerates motor neuron recovery in hospitalized children.
+        </p>
+        <p style="font-size:15px; color:#52525B; line-height:1.75; margin:0;">
+          Founded by Nick Wang and governed by an independent Board of Trustees, Keys for Cure converts 100% of concert ticket admissions and donor pledges into direct clinical grants and wellbeing salons for pediatric patients.
+        </p>
+      </div>
 
-<!-- CHRONOLOGICAL SEASON INDEX (Table / Row Architecture) -->
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"},"anchor":"calendar-index"} -->
-<div id="calendar-index" class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
-  
-  <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}}} -->
-  <div class="wp-block-columns">
-    <!-- Left Column: Section Title -->
-    <!-- wp:column {"width":"30%"} -->
-    <div class="wp-block-column" style="flex-basis:30%">
-      <p style="font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px;color:var(--wp--preset--color--primary)">CONCERT CHRONOLOGY</p>
-      <h2 style="font-weight:800;font-size:26px;line-height:1.2;margin-top:6px">Published Schedule</h2>
-      <p style="font-size:13.5px;color:#71717a;line-height:1.5;margin-top:12px">All concert net admissions are distributed to registered pediatric patient charities.</p>
+      <div style="background:#FAFAFA; border:1px solid #E4E4E7; border-radius:10px; padding:28px;">
+        <h3 style="font-size:16px; font-weight:700; color:#18181B; margin:0 0 18px; padding-bottom:12px; border-bottom:1px solid #E4E4E7;">
+          Direct Hospital Allocation Roster
+        </h3>
+        <div style="display:flex; flex-direction:column; gap:16px; font-size:13.5px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <strong style="color:#18181B;">Starship Children's Hospital</strong>
+              <div style="color:#71717A; font-size:12px;">Pediatric neurological rehabilitation &amp; wellbeing salons</div>
+            </div>
+            <span style="background:#ECFDF5; color:#0D9488; font-weight:700; font-size:11px; padding:3px 8px; border-radius:4px;">Primary</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <strong style="color:#18181B;">Cancer Society of New Zealand</strong>
+              <div style="color:#71717A; font-size:12px;">Youth patient lodging &amp; family transport assistance</div>
+            </div>
+            <span style="color:#71717A; font-size:12px; font-weight:600;">Active Partner</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <strong style="color:#18181B;">Mercy Hospice</strong>
+              <div style="color:#71717A; font-size:12px;">End-of-life musical dignity &amp; comforting acoustic visits</div>
+            </div>
+            <span style="color:#71717A; font-size:12px; font-weight:600;">Active Partner</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <strong style="color:#18181B;">Breast Cancer Foundation NZ</strong>
+              <div style="color:#71717A; font-size:12px;">Diagnostic research &amp; patient clinical wellness grants</div>
+            </div>
+            <span style="color:#71717A; font-size:12px; font-weight:600;">Active Partner</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /wp:column -->
-
-    <!-- Right Column: Minimalist Concert Rows -->
-    <!-- wp:column {"width":"70%"} -->
-    <div class="wp-block-column" style="flex-basis:70%">
-      
-      <!-- ROW 1 -->
-      <div style="border-top:1px solid #e4e4e7;border-bottom:1px solid #e4e4e7;padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div>
-          <span style="font-size:12px;font-weight:700;letter-spacing:1px;color:var(--wp--preset--color--primary)">28 NOV 2026 &bull; 7:00 PM</span>
-          <h3 style="margin:4px 0 2px;font-size:18px;font-weight:700">Auckland Youth Chamber Concert</h3>
-          <span style="font-size:13px;color:#71717a">Bruce Mason Centre, Takapuna &bull; Admission: $25 NZD</span>
-        </div>
-        <div>
-          <a class="wp-element-button wp-block-button__link" href="http://localhost:8080/event/auckland-youth-chamber-concert/" style="border-radius:0px;font-size:13px;padding:8px 16px">Reserve &rarr;</a>
-        </div>
-      </div>
-
-      <!-- ROW 2 -->
-      <div style="border-bottom:1px solid #e4e4e7;padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div>
-          <span style="font-size:12px;font-weight:700;letter-spacing:1px;color:var(--wp--preset--color--primary)">19 DEC 2026 &bull; 7:30 PM</span>
-          <h3 style="margin:4px 0 2px;font-size:18px;font-weight:700">Keys for Cure Annual Holiday Gala</h3>
-          <span style="font-size:13px;color:#71717a">Auckland Town Hall, Great Hall &bull; Admission: $45 NZD</span>
-        </div>
-        <div>
-          <a class="wp-element-button wp-block-button__link" href="http://localhost:8080/event/keys-for-cure-annual-holiday-gala/" style="border-radius:0px;font-size:13px;padding:8px 16px">Reserve &rarr;</a>
-        </div>
-      </div>
-
-      <!-- ROW 3 -->
-      <div style="border-bottom:1px solid #e4e4e7;padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div>
-          <span style="font-size:12px;font-weight:700;letter-spacing:1px;color:var(--wp--preset--color--primary)">16 JAN 2027 &bull; 2:00 PM</span>
-          <h3 style="margin:4px 0 2px;font-size:18px;font-weight:700">Community Arts &amp; Youth Music Matinee</h3>
-          <span style="font-size:13px;color:#71717a">Takapuna Community Hall &bull; Free / Donation</span>
-        </div>
-        <div>
-          <a class="wp-element-button wp-block-button__link" href="http://localhost:8080/event/community-arts-youth-music-matinee/" style="border-radius:0px;font-size:13px;padding:8px 16px">Reserve &rarr;</a>
-        </div>
-      </div>
-
-      <!-- ROW 4 -->
-      <div style="border-bottom:1px solid #e4e4e7;padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div>
-          <span style="font-size:12px;font-weight:700;letter-spacing:1px;color:var(--wp--preset--color--primary)">20 MAR 2027 &bull; 7:00 PM</span>
-          <h3 style="margin:4px 0 2px;font-size:18px;font-weight:700">Autumn Youth Cello Recital</h3>
-          <span style="font-size:13px;color:#71717a">Takapuna Community Hall &bull; Admission: $20 NZD</span>
-        </div>
-        <div>
-          <a class="wp-element-button wp-block-button__link" href="http://localhost:8080/event/autumn-youth-cello-recital/" style="border-radius:0px;font-size:13px;padding:8px 16px">Reserve &rarr;</a>
-        </div>
-      </div>
-
-    </div>
-    <!-- /wp:column -->
   </div>
-  <!-- /wp:columns -->
 
-</div>
-<!-- /wp:group -->
-
-<!-- FULL-WIDTH MONOCHROME PHOTOGRAPHIC DIVIDER -->
-<!-- wp:image {"align":"full","aspectRatio":"21/9","scale":"cover"} -->
-<figure class="wp-block-image alignfull"><img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-hero-grand-piano.jpg" alt="Concert Grand Piano Acoustic Hall" style="aspect-ratio:21/9;object-fit:cover;width:100%" /></figure>
-<!-- /wp:image -->
-
-<!-- MINIMALIST TRANSPARENCY & FINANCIAL ACCOUNTABILITY MATRIX -->
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
-  <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}}} -->
-  <div class="wp-block-columns">
-    <!-- Column 1: Financial Allocation -->
-    <!-- wp:column {"width":"50%"} -->
-    <div class="wp-block-column" style="flex-basis:50%">
-      <p style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--wp--preset--color--primary)">FISCAL ALLOCATION</p>
-      <h3 style="font-weight:800;font-size:24px;margin-top:6px">100% Direct Giving Policy</h3>
-      <p style="font-size:14px;color:#52525b;line-height:1.6;margin-top:12px">Keys for Cure maintains a strict non-profit standard. Administrative overhead is fully sponsored through volunteer trustees and local philanthropic patrons. Net admission proceeds directly support pediatric illness and adolescent mental wellbeing.</p>
+  <!-- MINISTERIAL ENDORSEMENT SECTION -->
+  <div style="background:#F4F4F5; padding:70px 24px; border-bottom:1px solid #E4E4E7;">
+    <div style="max-width:1040px; margin:0 auto;">
+      <div style="border-left:3px solid #0D9488; padding-left:24px;">
+        <p style="font-size:17px; line-height:1.75; color:#27272A; font-style:italic; margin:0 0 16px;">
+          &ldquo;Over the years the Keys for Cure Charitable Trust has raised funds for many important causes including the Cancer Society of New Zealand, Breast Cancer Foundation, Mercy Hospice and Starship Children's Hospital. My warm thanks to Nick Wang and the Young Musicians for using the power of music to share love and kindness through their dedication to charity.&rdquo;
+        </p>
+        <div>
+          <div style="font-weight:700; font-size:15px; color:#18181B;">Hon Paul Goldsmith</div>
+          <div style="font-size:13px; color:#71717A;">Minister for Arts, Culture and Heritage &bull; New Zealand Government</div>
+        </div>
+      </div>
     </div>
-    <!-- /wp:column -->
-
-    <!-- Column 2: Governance Verification -->
-    <!-- wp:column {"width":"50%"} -->
-    <div class="wp-block-column" style="flex-basis:50%">
-      <p style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--wp--preset--color--primary)">GOVERNANCE &amp; DISCLOSURE</p>
-      <h3 style="font-weight:800;font-size:24px;margin-top:6px">Registered Charity CC63798</h3>
-      <p style="font-size:14px;color:#52525b;line-height:1.6;margin-top:12px">Incorporated under the New Zealand Charities Act 2005. Official register entity CC63798. For formal financial statements, patron queries, or hospital partnership proposals, contact <strong>info@keysforcure.org.nz</strong>.</p>
-    </div>
-    <!-- /wp:column -->
   </div>
-  <!-- /wp:columns -->
-</div>
-<!-- /wp:group -->
 
-<!-- MINIMALIST FOOTER -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|contrast","text":"var:preset|color|base"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-color has-contrast-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-  <span style="font-size:13px;opacity:0.85">Keys for Cure &bull; Charity Registration CC63798 &bull; Takapuna, Auckland</span>
-  <span style="font-size:13px;opacity:0.85"><a href="http://localhost:8080/news/" style="color:inherit">News &amp; Programs &rarr;</a> &nbsp;|&nbsp; <a href="mailto:info@keysforcure.org.nz" style="color:inherit">info@keysforcure.org.nz</a></span>
+  <!-- NATIVE ELFSIGHT EVENT CALENDAR -->
+  <div id="schedule" style="background:#FFFFFF; padding:80px 24px;">
+    <div style="max-width:1040px; margin:0 auto;">
+      <div style="margin-bottom:32px;">
+        <span style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#0D9488;">Program Schedule</span>
+        <h2 style="font-size:30px; font-weight:800; color:#18181B; margin-top:6px; letter-spacing:-0.5px;">
+          2026/27 Chronological Concert Schedule
+        </h2>
+      </div>
+
+      [kfc_event_calendar title="Chronological Concert Schedule &amp; Pass Reservation"]
+    </div>
+  </div>
+
+  <!-- INSTITUTIONAL GOVERNANCE FOOTER -->
+  <div style="background:#18181B; color:#A1A1AA; padding:50px 24px; font-size:13px; border-top:1px solid #27272A;">
+    <div style="max-width:1040px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:28px;">
+      <div>
+        <div style="font-weight:700; color:#FFFFFF; font-size:15px; margin-bottom:4px;">Keys for Cure Charitable Trust</div>
+        <div>Charities Services Registration: CC63798 &bull; Charitable Trusts Act 1957</div>
+        <div style="margin-top:4px;">Headquarters: 20 Northcroft Street, Takapuna, Auckland, New Zealand</div>
+      </div>
+      <div>
+        <div style="font-weight:700; color:#FFFFFF; margin-bottom:4px;">Governance &amp; Disclosures</div>
+        <div>Inquiries: <a href="mailto:info@keysforcure.org.nz" style="color:#0D9488; text-decoration:none;">info@keysforcure.org.nz</a></div>
+        <div style="margin-top:4px;">100% of Net Concert Proceeds Distributed to Pediatric Health Beneficiaries</div>
+      </div>
+    </div>
+  </div>
+
 </div>
-<!-- /wp:group -->
 HTML;
     }
 }
