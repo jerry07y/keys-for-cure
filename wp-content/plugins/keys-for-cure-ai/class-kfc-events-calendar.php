@@ -28,6 +28,11 @@ class KFC_Events_Calendar {
         // AJAX Handlers for Door Check-In
         add_action('wp_ajax_kfc_door_verify', [$this, 'handle_door_verify']);
         add_action('wp_ajax_nopriv_kfc_door_verify', [$this, 'handle_door_verify']);
+
+        // AJAX Handlers for Door Search & CSV Export
+        add_action('wp_ajax_kfc_door_search', [$this, 'handle_door_search']);
+        add_action('wp_ajax_nopriv_kfc_door_search', [$this, 'handle_door_search']);
+        add_action('wp_ajax_kfc_export_csv', [$this, 'handle_export_csv']);
     }
 
     public static function get_table_name(): string {
@@ -229,6 +234,83 @@ class KFC_Events_Calendar {
             'donation_pledge' => (float) $reg->donation_pledge,
             'time'            => date_i18n('g:i A')
         ]);
+    }
+
+    public function handle_door_search() {
+        $pin = sanitize_text_field($_POST['pin'] ?? '');
+        $query = sanitize_text_field($_POST['query'] ?? '');
+
+        $expected_pin = get_option('kfc_door_pin', '2027');
+        if ($pin !== $expected_pin) {
+            wp_send_json_error(['message' => 'Invalid Door PIN code.']);
+            return;
+        }
+
+        if (strlen($query) < 2) {
+            wp_send_json_success(['results' => []]);
+            return;
+        }
+
+        global $wpdb;
+        $table = self::get_table_name();
+        $like = '%' . $wpdb->esc_like($query) . '%';
+
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT r.id, r.event_id, r.booking_ref, r.attendee_name, r.guest_count, r.status, r.checked_in_at, p.post_title as event_title
+             FROM {$table} r
+             LEFT JOIN {$wpdb->posts} p ON (r.event_id = p.ID)
+             WHERE r.attendee_name LIKE %s OR r.booking_ref LIKE %s OR r.attendee_email LIKE %s
+             ORDER BY r.created_at DESC
+             LIMIT 15",
+            $like,
+            $like,
+            $like
+        ));
+
+        wp_send_json_success(['results' => $rows]);
+    }
+
+    public function handle_export_csv() {
+        if (!current_user_can('edit_posts')) {
+            wp_die('Unauthorized. Admin permissions required to export charity records.');
+        }
+
+        global $wpdb;
+        $table = self::get_table_name();
+        $rows = $wpdb->get_results(
+            "SELECT r.*, p.post_title as event_title
+             FROM {$table} r
+             LEFT JOIN {$wpdb->posts} p ON (r.event_id = p.ID)
+             ORDER BY r.created_at DESC"
+        );
+
+        $filename = 'keys-for-cure-attendees-' . date('Y-m-d') . '.csv';
+
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+
+        $out = fopen('php://output', 'w');
+        fputcsv($out, ['ID', 'Booking Ref', 'Event Title', 'Attendee Name', 'Email', 'Guest Count', 'Pledge NZD', 'Status', 'Checked In At', 'Created At']);
+
+        foreach ($rows as $r) {
+            fputcsv($out, [
+                $r->id,
+                $r->booking_ref,
+                $r->event_title ?: 'Charity Concert',
+                $r->attendee_name,
+                $r->attendee_email,
+                $r->guest_count,
+                number_format((float)$r->donation_pledge, 2, '.', ''),
+                $r->status,
+                $r->checked_in_at ?: 'N/A',
+                $r->created_at
+            ]);
+        }
+
+        fclose($out);
+        exit;
     }
 
     public function render_calendar_shortcode($atts) {
@@ -559,7 +641,13 @@ class KFC_Events_Calendar {
                     <div id="doorMsgMeta" style="font-size: 12px; margin-top: 6px; opacity: 0.9;">Booking Ref</div>
                 </div>
 
-                <div id="searchWrap" style="margin-top: 16px;"></div>
+                <div id="searchWrap" style="margin-top: 16px;">
+                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 14px;">
+                        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 6px;">Manual Attendee Search (Dead Batteries)</div>
+                        <input type="text" id="doorSearchInput" placeholder="Type attendee name or KFC-TKT-..." onkeyup="handleManualSearch(this.value)" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 14px; box-sizing: border-box;">
+                        <div id="searchResults" style="margin-top: 10px; max-height: 220px; overflow-y: auto;"></div>
+                    </div>
+                </div>
             </div>
 
             <script>
@@ -683,6 +771,38 @@ class KFC_Events_Calendar {
                         title.innerText = '❌ NETWORK ERROR';
                         sub.innerText = 'Check WiFi/Cellular connection';
                     });
+                }
+
+                var searchTimer = null;
+                function handleManualSearch(q) {
+                    clearTimeout(searchTimer);
+                    if (q.length < 2) {
+                        document.getElementById('searchResults').innerHTML = '';
+                        return;
+                    }
+                    searchTimer = setTimeout(function() {
+                        var fd = new FormData();
+                        fd.append('action', 'kfc_door_search');
+                        fd.append('pin', storedPin);
+                        fd.append('query', q);
+                        fetch('<?php echo esc_url($ajax_url); ?>', { method: 'POST', body: fd })
+                        .then(r => r.json())
+                        .then(res => {
+                            if (res.success) {
+                                var html = '';
+                                res.data.results.forEach(function(item) {
+                                    var btn = item.status === 'checked_in'
+                                        ? '<span style="color:#10b981; font-weight:700; font-size:12px">Checked In</span>'
+                                        : '<button onclick="verifyScannedCode(\'' + item.booking_ref + '\')" style="background:#2563eb; color:#fff; border:none; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer;">Admit &rarr;</button>';
+                                    html += '<div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #334155; font-size:13px;">'
+                                          + '<div><strong>' + item.attendee_name + '</strong> (' + item.guest_count + ' guests)<br><span style="color:#94a3b8; font-size:11px">' + item.booking_ref + '</span></div>'
+                                          + '<div>' + btn + '</div>'
+                                          + '</div>';
+                                });
+                                document.getElementById('searchResults').innerHTML = html || '<div style="color:#71717a; font-size:12px; padding:6px 0">No matching attendees found</div>';
+                            }
+                        });
+                    }, 300);
                 }
             </script>
         </body>

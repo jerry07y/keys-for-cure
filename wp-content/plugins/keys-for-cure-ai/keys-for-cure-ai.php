@@ -850,6 +850,19 @@ class KeysForCureAI {
 
         $ajax_nonce = wp_create_nonce('kfc_admin_nonce');
         $rest_nonce = wp_create_nonce('wp_rest');
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'kfc_registrations';
+        $total_registrations = 0;
+        $total_checked_in = 0;
+        $total_pledged = 0;
+        $has_table = ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name);
+        if ($has_table) {
+            $total_registrations = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE status IN ('confirmed', 'checked_in')");
+            $total_checked_in = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE status = 'checked_in'");
+            $total_pledged = (float) $wpdb->get_var("SELECT SUM(donation_pledge) FROM $table_name WHERE status IN ('confirmed', 'checked_in')");
+        }
+        $door_pin = get_option('kfc_door_pin', '2027');
         ?>
         <div class="wrap" style="max-width: 1200px; margin-top: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
             <div style="background: #ffffff; border: 1px solid #ccd0d4; border-radius: 8px; padding: 24px 30px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
@@ -892,6 +905,51 @@ class KeysForCureAI {
                                 </button>
                             </div>
                         <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Door Check-In & Calendar Operations -->
+            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 8px; padding: 22px 28px; margin-bottom: 24px; color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="background: #10b981; color: #ffffff; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">Native System</span>
+                            <h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #ffffff;">Concert Door Check-In &amp; Event Calendar</h2>
+                        </div>
+                        <p style="margin: 6px 0 0; color: #94a3b8; font-size: 13.5px;">
+                            $0-Cost Elfsight-style calendar card widget &bull; High-speed camera QR code check-in &bull; Duplicate-entry rejection.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="<?php echo esc_url(home_url('/checkin/')); ?>" target="_blank" class="button button-primary" style="background: #2563eb; border-color: #2563eb; font-weight: 600; padding: 4px 16px; height: 34px; line-height: 24px; display: inline-flex; align-items: center; gap: 6px;">
+                            <span>📷 Launch Door Scanner Portal</span>
+                        </a>
+                        <a href="<?php echo esc_url(admin_url('admin-ajax.php?action=kfc_export_csv')); ?>" class="button" style="background: #334155; border-color: #475569; color: #ffffff; font-weight: 600; padding: 4px 16px; height: 34px; line-height: 24px; display: inline-flex; align-items: center; gap: 6px;">
+                            <span>📥 Export Guest List (CSV)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats & Quick Reference -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <div style="background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px;">Total RSVPs</div>
+                        <div style="font-size: 22px; font-weight: 700; color: #ffffff; margin-top: 4px;"><?php echo number_format($total_registrations); ?> <span style="font-size: 12px; font-weight: 400; color: #94a3b8;">attendees</span></div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px;">Admitted at Door</div>
+                        <div style="font-size: 22px; font-weight: 700; color: #10b981; margin-top: 4px;"><?php echo number_format($total_checked_in); ?> <span style="font-size: 12px; font-weight: 400; color: #94a3b8;">checked in</span></div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px;">Charity Pledges</div>
+                        <div style="font-size: 22px; font-weight: 700; color: #f59e0b; margin-top: 4px;">$<?php echo number_format($total_pledged, 2); ?> <span style="font-size: 12px; font-weight: 400; color: #94a3b8;">NZD</span></div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px;">Door PIN &bull; Shortcode</div>
+                        <div style="font-size: 13px; font-weight: 600; color: #e2e8f0; margin-top: 6px;">
+                            PIN: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: #38bdf8;"><?php echo esc_html($door_pin); ?></code> &bull; <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: #a78bfa;">[kfc_event_calendar]</code>
+                        </div>
                     </div>
                 </div>
             </div>
