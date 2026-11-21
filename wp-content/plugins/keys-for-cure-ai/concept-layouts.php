@@ -171,245 +171,139 @@ class KFC_Concept_Layouts {
 HTML;
     }
 
-    private static function get_concept_2_harmonies_of_hope(): string {
+    public static function get_concept_2_harmonies_of_hope(): string {
         return <<<HTML
-<!-- SPLIT-SCREEN CAMPAIGN HERO (Playing For Change & El Sistema Inspired) -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|accent-5"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-accent-5-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--40)">
-  <!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|50"}}} -->
-  <div class="wp-block-columns are-vertically-aligned-center">
-    <!-- LEFT: Mission Headline & Action -->
-    <!-- wp:column {"verticalAlignment":"center","width":"55%"} -->
-    <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%">
-      <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"2px","textTransform":"uppercase","fontWeight":"700"}},"fontSize":"small"} -->
-      <p class="has-small-font-size" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--wp--preset--color--primary)">Youth Music Philanthropy &bull; 100% Non-Profit &bull; CC63798</p>
-      <!-- /wp:paragraph -->
+<!-- CONCEPT 2: HARMONIES OF HOPE (Playing For Change & El Sistema Archetype) -->
+<div class="kfc-theme-youth" style="background:#F8FAFC; color:#1E293B; font-family:'Inter', -apple-system, sans-serif;">
 
-      <!-- wp:heading {"level":1,"style":{"typography":{"lineHeight":"1.15","fontWeight":"800"}},"fontSize":"xx-large"} -->
-      <h1 class="wp-block-heading has-xx-large-font-size" style="line-height:1.15;font-weight:800;margin-top:8px">Empowering Young Musicians. Healing Young Lives.</h1>
-      <!-- /wp:heading -->
-
-      <!-- wp:paragraph {"fontSize":"medium","style":{"spacing":{"margin":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|40"}}}} -->
-      <p class="has-medium-font-size" style="margin-top:var(--wp--preset--spacing--20);margin-bottom:var(--wp--preset--spacing--40);line-height:1.6">We believe music creates resilience. Keys for Cure connects gifted young New Zealand instrumentalists with high-profile concert stages, turning audience admissions into direct pediatric healthcare and youth wellbeing funding.</p>
-      <!-- /wp:paragraph -->
-
-      <!-- wp:buttons -->
-      <div class="wp-block-buttons">
-        <!-- wp:button {"style":{"border":{"radius":"9999px"}}} -->
-        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#campaign-events" style="border-radius:9999px">Explore 2026/27 Concerts &rarr;</a></div>
-        <!-- /wp:button -->
-        <!-- wp:button {"className":"is-style-outline","style":{"border":{"radius":"9999px"}}} -->
-        <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#impact-tiers" style="border-radius:9999px">Support Pediatric Care &rarr;</a></div>
-        <!-- /wp:button -->
+  <!-- ASYMMETRIC SPLIT HERO -->
+  <div style="background:linear-gradient(135deg, #0052CC 0%, #022443 100%); color:#FFFFFF; padding:80px 24px 70px;">
+    <div style="max-width:1140px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:40px; align-items:center;">
+      <div>
+        <span style="display:inline-block; background:#F59E0B; color:#090D16; padding:4px 14px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px;">
+          Youth Classical Movement &bull; Charity CC63798
+        </span>
+        <h1 style="font-size:clamp(32px, 4.5vw, 50px); font-weight:900; line-height:1.15; margin:0 0 18px; letter-spacing:-0.5px;">
+          Music as a Force for Good &mdash; Played by Youth, for Children in Need
+        </h1>
+        <p style="font-size:16.5px; line-height:1.65; color:#E2E8F0; margin:0 0 28px; max-width:540px;">
+          Founded by Nick Wang, Keys for Cure empowers young classical virtuosi across New Zealand to channel their passion into life-changing pediatric healthcare and youth mental wellbeing support.
+        </p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#events" style="background:#F59E0B; color:#090D16; font-weight:800; padding:14px 28px; border-radius:10px; text-decoration:none; font-size:14px; box-shadow:0 10px 20px rgba(245,158,11,0.25);">
+            Reserve Concert Pass &rarr;
+          </a>
+          <a href="#initiative" style="background:rgba(255,255,255,0.15); color:#FFFFFF; font-weight:700; padding:14px 24px; border-radius:10px; text-decoration:none; font-size:14px; backdrop-filter:blur(4px);">
+            Our 2026 Initiative
+          </a>
+        </div>
       </div>
-      <!-- /wp:buttons -->
-    </div>
-    <!-- /wp:column -->
 
-    <!-- RIGHT: Dynamic Framed Concert Photography -->
-    <!-- wp:column {"verticalAlignment":"center","width":"45%"} -->
-    <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%">
-      <!-- wp:image {"aspectRatio":"4/3","scale":"cover","style":{"border":{"radius":"18px"}}} -->
-      <figure class="wp-block-image"><img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-chamber-concert.jpg" alt="Youth chamber orchestra performing benefit concert" style="border-radius:18px;aspect-ratio:4/3;object-fit:cover;box-shadow:0 12px 32px rgba(0,0,0,0.12)" /></figure>
-      <!-- /wp:image -->
-    </div>
-    <!-- /wp:column -->
-  </div>
-  <!-- /wp:columns -->
-</div>
-<!-- /wp:group -->
-
-<!-- IMPACT RIBBON STRIP -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|contrast","text":"var:preset|color|base"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-color has-contrast-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--40)">
-  <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
-  <div class="wp-block-columns">
-    <!-- wp:column {"style":{"typography":{"textAlign":"center"}}} -->
-    <div class="wp-block-column" style="text-align:center">
-      <p style="margin:0;font-weight:700;font-size:15px">100+ Youth Performers</p>
-      <p style="margin:2px 0 0;font-size:12px;opacity:0.85">Auckland string players &amp; soloists</p>
-    </div>
-    <!-- /wp:column -->
-    <!-- wp:column {"style":{"typography":{"textAlign":"center"}}} -->
-    <div class="wp-block-column" style="text-align:center">
-      <p style="margin:0;font-weight:700;font-size:15px">5 Benefit Stages</p>
-      <p style="margin:2px 0 0;font-size:12px;opacity:0.85">Town Hall to Bruce Mason Centre</p>
-    </div>
-    <!-- /wp:column -->
-    <!-- wp:column {"style":{"typography":{"textAlign":"center"}}} -->
-    <div class="wp-block-column" style="text-align:center">
-      <p style="margin:0;font-weight:700;font-size:15px">100% Proceeds to Care</p>
-      <p style="margin:2px 0 0;font-size:12px;opacity:0.85">Zero commercial shareholder cut</p>
-    </div>
-    <!-- /wp:column -->
-    <!-- wp:column {"style":{"typography":{"textAlign":"center"}}} -->
-    <div class="wp-block-column" style="text-align:center">
-      <p style="margin:0;font-weight:700;font-size:15px">Charity Reg CC63798</p>
-      <p style="margin:2px 0 0;font-size:12px;opacity:0.85">Department of Internal Affairs</p>
-    </div>
-    <!-- /wp:column -->
-  </div>
-  <!-- /wp:columns -->
-</div>
-<!-- /wp:group -->
-
-<!-- 3-COLUMN MODERN CAMPAIGN EVENT CARD GRID -->
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"},"anchor":"campaign-events"} -->
-<div id="campaign-events" class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
-  <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"2px","textTransform":"uppercase","fontWeight":"700","textAlign":"center"}},"fontSize":"small"} -->
-  <p class="has-small-font-size" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--wp--preset--color--primary)">Season 2026/27 Benefit Concerts</p>
-  <!-- /wp:paragraph -->
-
-  <!-- wp:heading {"level":2,"style":{"typography":{"fontWeight":"800","textAlign":"center"}},"fontSize":"x-large"} -->
-  <h2 class="wp-block-heading has-x-large-font-size" style="font-weight:800;text-align:center">Live Music That Makes a Difference</h2>
-  <!-- /wp:heading -->
-
-  <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|40","margin":{"top":"var:preset|spacing|40"}}}} -->
-  <div class="wp-block-columns" style="margin-top:var(--wp--preset--spacing--40)">
-    <!-- CARD 1 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|30"},"border":{"width":"1px","color":"var:preset|color|accent-5","radius":"14px"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-color:var(--wp--preset--color--accent-5);border-width:1px;border-style:solid;border-radius:14px;padding:var(--wp--preset--spacing--30);box-shadow:0 4px 16px rgba(0,0,0,0.04)">
-      <!-- wp:image {"aspectRatio":"16/9","scale":"cover","style":{"border":{"radius":"10px"}}} -->
-      <figure class="wp-block-image"><img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-chamber-concert.jpg" alt="Auckland Youth Chamber Concert" style="border-radius:10px;aspect-ratio:16/9;object-fit:cover;width:100%" /></figure>
-      <!-- /wp:image -->
-      <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"1px","textTransform":"uppercase","fontWeight":"700"}},"fontSize":"small"} -->
-      <p class="has-small-font-size" style="font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--wp--preset--color--primary);margin-top:12px;margin-bottom:4px">Chamber Series</p>
-      <!-- /wp:paragraph -->
-      <!-- wp:heading {"level":3,"style":{"typography":{"fontWeight":"700"}},"fontSize":"medium"} -->
-      <h3 class="wp-block-heading has-medium-font-size" style="font-weight:700;margin-bottom:8px">Auckland Youth Chamber Concert</h3>
-      <!-- /wp:heading -->
-      <!-- wp:paragraph {"fontSize":"small"} -->
-      <p class="has-small-font-size">Saturday, 28 Nov 2026 &bull; 7:00 PM<br>Bruce Mason Centre &bull; Takapuna<br>Admission: <strong>$25 NZD</strong></p>
-      <!-- /wp:paragraph -->
-      <!-- wp:buttons -->
-      <div class="wp-block-buttons">
-        <!-- wp:button {"style":{"border":{"radius":"9999px"}}} -->
-        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="http://localhost:8080/event/auckland-youth-chamber-concert/" style="border-radius:9999px">Reserve Tickets</a></div>
-        <!-- /wp:button -->
+      <div style="position:relative;">
+        <div style="background:#FFFFFF; border-radius:20px; overflow:hidden; box-shadow:0 25px 50px -12px rgba(0,0,0,0.35); padding:12px; border:2px solid rgba(255,255,255,0.2);">
+          <img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-hero-grand-piano.jpg" alt="Keys for Cure Young Pianist" style="width:100%; border-radius:14px; display:block; height:320px; object-fit:cover;">
+          <div style="padding:16px 14px 6px; color:#1E293B;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:800; font-size:14px; color:#0052CC;">Annual Flagship Benefit Season</span>
+              <span style="background:#ECFDF5; color:#059669; font-size:11px; font-weight:700; padding:2px 8px; border-radius:6px;">Starship Beneficiary</span>
+            </div>
+            <div style="font-size:12.5px; color:#64748B; margin-top:4px;">Featuring the Young Musicians Collective performing Beethoven, Chopin &amp; Brahms.</div>
+          </div>
+        </div>
       </div>
-      <!-- /wp:buttons -->
     </div>
-    <!-- /wp:column -->
-
-    <!-- CARD 2 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|30"},"border":{"width":"2px","color":"var:preset|color|primary","radius":"14px"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-color:var(--wp--preset--color--primary);border-width:2px;border-style:solid;border-radius:14px;padding:var(--wp--preset--spacing--30);box-shadow:0 6px 20px rgba(0,82,204,0.1)">
-      <!-- wp:image {"aspectRatio":"16/9","scale":"cover","style":{"border":{"radius":"10px"}}} -->
-      <figure class="wp-block-image"><img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-holiday-gala.jpg" alt="Keys for Cure Annual Holiday Gala" style="border-radius:10px;aspect-ratio:16/9;object-fit:cover;width:100%" /></figure>
-      <!-- /wp:image -->
-      <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"1px","textTransform":"uppercase","fontWeight":"700"}},"fontSize":"small"} -->
-      <p class="has-small-font-size" style="font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--wp--preset--color--primary);margin-top:12px;margin-bottom:4px">Annual Gala &bull; Spotlight</p>
-      <!-- /wp:paragraph -->
-      <!-- wp:heading {"level":3,"style":{"typography":{"fontWeight":"700"}},"fontSize":"medium"} -->
-      <h3 class="wp-block-heading has-medium-font-size" style="font-weight:700;margin-bottom:8px">Keys for Cure Annual Holiday Gala</h3>
-      <!-- /wp:heading -->
-      <!-- wp:paragraph {"fontSize":"small"} -->
-      <p class="has-small-font-size">Saturday, 19 Dec 2026 &bull; 7:30 PM<br>Auckland Town Hall, Great Hall<br>Admission: <strong>$45 NZD</strong></p>
-      <!-- /wp:paragraph -->
-      <!-- wp:buttons -->
-      <div class="wp-block-buttons">
-        <!-- wp:button {"style":{"border":{"radius":"9999px"}}} -->
-        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="http://localhost:8080/event/keys-for-cure-annual-holiday-gala/" style="border-radius:9999px">Reserve Gala Seat</a></div>
-        <!-- /wp:button -->
-      </div>
-      <!-- /wp:buttons -->
-    </div>
-    <!-- /wp:column -->
-
-    <!-- CARD 3 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|30"},"border":{"width":"1px","color":"var:preset|color|accent-5","radius":"14px"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-color:var(--wp--preset--color--accent-5);border-width:1px;border-style:solid;border-radius:14px;padding:var(--wp--preset--spacing--30);box-shadow:0 4px 16px rgba(0,0,0,0.04)">
-      <!-- wp:image {"aspectRatio":"16/9","scale":"cover","style":{"border":{"radius":"10px"}}} -->
-      <figure class="wp-block-image"><img src="http://localhost:8080/wp-content/uploads/2026/11/kfc-piano-hands.jpg" alt="Community Arts &amp; Youth Music Matinee" style="border-radius:10px;aspect-ratio:16/9;object-fit:cover;width:100%" /></figure>
-      <!-- /wp:image -->
-      <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"1px","textTransform":"uppercase","fontWeight":"700"}},"fontSize":"small"} -->
-      <p class="has-small-font-size" style="font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--wp--preset--color--primary);margin-top:12px;margin-bottom:4px">Community Showcase</p>
-      <!-- /wp:paragraph -->
-      <!-- wp:heading {"level":3,"style":{"typography":{"fontWeight":"700"}},"fontSize":"medium"} -->
-      <h3 class="wp-block-heading has-medium-font-size" style="font-weight:700;margin-bottom:8px">Community Arts &amp; Music Matinee</h3>
-      <!-- /wp:heading -->
-      <!-- wp:paragraph {"fontSize":"small"} -->
-      <p class="has-small-font-size">Saturday, 16 Jan 2027 &bull; 2:00 PM<br>Takapuna Community Hall<br>Admission: <strong>Free / Donation</strong></p>
-      <!-- /wp:paragraph -->
-      <!-- wp:buttons -->
-      <div class="wp-block-buttons">
-        <!-- wp:button {"className":"is-style-outline","style":{"border":{"radius":"9999px"}}} -->
-        <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="http://localhost:8080/event/community-arts-youth-music-matinee/" style="border-radius:9999px">Free Registration</a></div>
-        <!-- /wp:button -->
-      </div>
-      <!-- /wp:buttons -->
-    </div>
-    <!-- /wp:column -->
   </div>
-  <!-- /wp:columns -->
 
-  <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}},"typography":{"textAlign":"center"}}} -->
-  <p style="margin-top:var(--wp--preset--spacing--40);text-align:center"><a href="http://localhost:8080/news/"><strong>Visit the News &amp; Updates Hub for Full Event Dossiers &rarr;</strong></a></p>
-  <!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-
-<!-- TANGIBLE GIVING & IMPACT CALCULATOR (Playing For Change Inspired) -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|accent-5"}},"layout":{"type":"constrained"},"anchor":"impact-tiers"} -->
-<div id="impact-tiers" class="wp-block-group alignfull has-accent-5-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--40)">
-  <!-- wp:paragraph {"style":{"typography":{"letterSpacing":"2px","textTransform":"uppercase","fontWeight":"700","textAlign":"center"}},"fontSize":"small"} -->
-  <p class="has-small-font-size" style="font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--wp--preset--color--primary)">Where Your Gift Goes</p>
-  <!-- /wp:paragraph -->
-
-  <!-- wp:heading {"level":2,"style":{"typography":{"fontWeight":"800","textAlign":"center"}},"fontSize":"x-large"} -->
-  <h2 class="wp-block-heading has-x-large-font-size" style="font-weight:800;text-align:center">Tangible Giving, Measurable Care</h2>
-  <!-- /wp:heading -->
-
-  <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|40","margin":{"top":"var:preset|spacing|40"}}}} -->
-  <div class="wp-block-columns" style="margin-top:var(--wp--preset--spacing--40)">
-    <!-- TIER 1 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|40"},"border":{"radius":"14px"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-radius:14px;padding:var(--wp--preset--spacing--40);text-align:center">
-      <h3 style="font-size:28px;font-weight:800;color:var(--wp--preset--color--primary);margin:0 0 8px">$25 NZD</h3>
-      <p style="font-weight:700;font-size:15px;margin:0 0 8px">1 Student Performance Seat</p>
-      <p style="font-size:13.5px;color:#475569;margin-bottom:20px">Covers concert hall admission for one student and masterclass sheet music materials.</p>
-      <div class="wp-block-buttons" style="justify-content:center"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="http://localhost:8080/events/" style="border-radius:9999px">Give $25</a></div></div>
+  <!-- 3-COLUMN IMPACT COUNTERS -->
+  <div style="background:#FFFFFF; border-bottom:1px solid #E2E8F0; padding:40px 24px;">
+    <div style="max-width:1140px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; text-align:center;">
+      <div style="padding:18px; border-radius:12px; background:#F8FAFC; border:1px solid #E2E8F0;">
+        <div style="font-size:36px; font-weight:900; color:#0052CC; line-height:1;">k+</div>
+        <div style="font-size:14px; font-weight:700; color:#1E293B; margin-top:6px;">Raised for Pediatric Care</div>
+        <div style="font-size:12px; color:#64748B; margin-top:2px;">100% net concert proceeds donated directly</div>
+      </div>
+      <div style="padding:18px; border-radius:12px; background:#F8FAFC; border:1px solid #E2E8F0;">
+        <div style="font-size:36px; font-weight:900; color:#F59E0B; line-height:1;">350+</div>
+        <div style="font-size:14px; font-weight:700; color:#1E293B; margin-top:6px;">Young Musicians on Stage</div>
+        <div style="font-size:12px; color:#64748B; margin-top:2px;">Pianists, cellists, and chamber strings</div>
+      </div>
+      <div style="padding:18px; border-radius:12px; background:#F8FAFC; border:1px solid #E2E8F0;">
+        <div style="font-size:36px; font-weight:900; color:#10B981; line-height:1;">4 Causes</div>
+        <div style="font-size:14px; font-weight:700; color:#1E293B; margin-top:6px;">Healthcare Beneficiaries</div>
+        <div style="font-size:12px; color:#64748B; margin-top:2px;">Starship Hospital, Cancer Society, Breast Cancer &amp; Hospice</div>
+      </div>
     </div>
-    <!-- /wp:column -->
-
-    <!-- TIER 2 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|40"},"border":{"radius":"14px","width":"2px","color":"var:preset|color--accent-4"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-radius:14px;border:2px solid var(--wp--preset--color--primary);padding:var(--wp--preset--spacing--40);text-align:center">
-      <h3 style="font-size:28px;font-weight:800;color:var(--wp--preset--color--primary);margin:0 0 8px">$75 NZD</h3>
-      <p style="font-weight:700;font-size:15px;margin:0 0 8px">Pediatric Music Therapy Session</p>
-      <p style="font-size:13.5px;color:#475569;margin-bottom:20px">Funds one bedside therapeutic musical experience for recovering hospital patients.</p>
-      <div class="wp-block-buttons" style="justify-content:center"><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="mailto:info@keysforcure.org.nz?subject=Music%20Therapy%20Gift" style="border-radius:9999px">Give $75</a></div></div>
-    </div>
-    <!-- /wp:column -->
-
-    <!-- TIER 3 -->
-    <!-- wp:column {"style":{"spacing":{"padding":"var:preset|spacing|40"},"border":{"radius":"14px"}},"backgroundColor":"base"} -->
-    <div class="wp-block-column has-base-background-color has-background" style="border-radius:14px;padding:var(--wp--preset--spacing--40);text-align:center">
-      <h3 style="font-size:28px;font-weight:800;color:var(--wp--preset--color--primary);margin:0 0 8px">$150 NZD</h3>
-      <p style="font-weight:700;font-size:15px;margin:0 0 8px">Youth Soloist Sponsorship</p>
-      <p style="font-size:13.5px;color:#475569;margin-bottom:20px">Underwrites rehearsal facilities and contributes directly to pediatric wellness grants.</p>
-      <div class="wp-block-buttons" style="justify-content:center"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="mailto:info@keysforcure.org.nz?subject=Youth%20Soloist%20Sponsorship" style="border-radius:9999px">Sponsor a Soloist</a></div></div>
-    </div>
-    <!-- /wp:column -->
   </div>
-  <!-- /wp:columns -->
-</div>
-<!-- /wp:group -->
 
-<!-- CHARITY GOVERNANCE STRIP -->
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"color":{"background":"var:preset|color|contrast","text":"var:preset|color|base"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-color has-contrast-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);text-align:center">
-  <p style="font-weight:700;font-size:14px;margin:0">Keys for Cure New Zealand &bull; Charities Registration CC63798</p>
-  <p style="font-size:13px;opacity:0.85;margin:4px 0 0">Takapuna, Auckland &bull; Contact: <a href="mailto:info@keysforcure.org.nz" style="color:inherit">info@keysforcure.org.nz</a> &bull; 100% of concert proceeds fund youth health and wellbeing.</p>
+  <!-- 2026/27 MAJOR INITIATIVE: CHILDREN'S MENTAL WELLBEING SUPPORT SALON -->
+  <div id="initiative" style="background:#F1F5F9; padding:70px 24px; border-bottom:1px solid #E2E8F0;">
+    <div style="max-width:1140px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:36px; align-items:center;">
+      <div>
+        <span style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#0052CC; font-weight:800;">2026/27 Flagship Program</span>
+        <h2 style="font-size:32px; font-weight:900; color:#0F172A; margin:8px 0 16px; line-height:1.2;">
+          The Children’s Mental Wellbeing Support Salon
+        </h2>
+        <p style="font-size:15px; color:#475569; line-height:1.7; margin:0 0 16px;">
+          Music is more than entertainment; it is an active bridge to emotional resilience. In 2026, Keys for Cure expands its philanthropic scope through the Children’s Mental Wellbeing Support Salon &mdash; bringing young musicians directly to pediatric recovery wards and community wellbeing spaces.
+        </p>
+        <div style="background:#FFFFFF; border-left:4px solid #F59E0B; padding:14px 18px; border-radius:0 8px 8px 0; font-size:13.5px; color:#334155; box-shadow:0 2px 4px rgba(0,0,0,0.03);">
+          &ldquo;Nick Wang and the entire Keys for Cure team &mdash; thank you for your vision, your energy and your commitment to using music as a force for good.&rdquo;
+          <div style="font-weight:700; margin-top:6px; color:#0052CC;">&mdash; Rt Hon Christopher Luxon, Prime Minister of New Zealand</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr; gap:16px;">
+        <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:12px; padding:20px;">
+          <h4 style="margin:0 0 6px; font-size:16px; color:#0052CC; font-weight:800;">🌟 Empowering Youth Agency</h4>
+          <p style="margin:0; font-size:13px; color:#64748B; line-height:1.6;">Encouraging adolescent performers to use their artistic discipline to solve real social challenges.</p>
+        </div>
+        <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:12px; padding:20px;">
+          <h4 style="margin:0 0 6px; font-size:16px; color:#0052CC; font-weight:800;">🏥 Pediatric Health Support</h4>
+          <p style="margin:0; font-size:13px; color:#64748B; line-height:1.6;">Targeted donations providing musical therapy and clinical aid at Starship Children's Hospital.</p>
+        </div>
+        <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:12px; padding:20px;">
+          <h4 style="margin:0 0 6px; font-size:16px; color:#0052CC; font-weight:800;">🤝 Ministerial Governance Endorsement</h4>
+          <p style="margin:0; font-size:13px; color:#64748B; line-height:1.6;">Praised by Hon Paul Goldsmith, Minister for Arts, Culture and Heritage, for dedication to charitable transparency.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NATIVE ELFSIGHT EVENT CALENDAR -->
+  <div id="events" style="background:#FFFFFF; padding:70px 24px;">
+    <div style="max-width:1140px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:32px;">
+        <span style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#0052CC; font-weight:800;">Community Concerts &amp; Recitals</span>
+        <h2 style="font-size:32px; font-weight:900; color:#0F172A; margin-top:6px;">Upcoming Benefit Concerts</h2>
+        <p style="font-size:14px; color:#64748B; max-width:560px; margin:8px auto 0;">
+          Select any concert to view the performance program and secure your pass with our 1-step instant RSVP.
+        </p>
+      </div>
+
+      [kfc_event_calendar title="Upcoming Community Concerts &amp; Benefit Recitals"]
+    </div>
+  </div>
+
+  <!-- COMMUNITY FOOTER -->
+  <div style="background:#0F172A; color:#FFFFFF; padding:50px 24px; font-size:13px;">
+    <div style="max-width:1140px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+      <div>
+        <div style="font-weight:900; font-size:16px; color:#FFFFFF; margin-bottom:4px;">Keys for Cure Charitable Trust</div>
+        <div style="color:#94A3B8;">Charities Services Registration No: CC63798</div>
+        <div style="color:#94A3B8; margin-top:4px;">20 Northcroft Street, Takapuna, Auckland, New Zealand</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-weight:700; color:#F59E0B; margin-bottom:4px;">Get in Touch</div>
+        <div><a href="mailto:info@keysforcure.org.nz" style="color:#FFFFFF; text-decoration:none;">info@keysforcure.org.nz</a></div>
+        <div style="color:#94A3B8; margin-top:4px;">&copy; 2026 Keys for Cure. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+
 </div>
-<!-- /wp:group -->
 HTML;
     }
 
-    /**
-     * Concept 3: Nordic Minimalist (Architectural Calendar & Gallery Index)
-     * Inspired by Live Music Now UK & Nordoff and Robbins
-     */
     private static function get_concept_3_nordic_minimalist(): string {
         return <<<HTML
 <!-- ARCHITECTURAL MONOLITH HERO (Live Music Now & Nordoff Robbins Inspired) -->
