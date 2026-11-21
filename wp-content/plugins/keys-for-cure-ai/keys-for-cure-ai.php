@@ -27,16 +27,44 @@ class KeysForCureAI {
         // Native admin-ajax handlers for 100% reliable dashboard operations
         add_action('wp_ajax_kfc_admin_chat', [$this, 'handle_ajax_admin_chat']);
         add_action('wp_ajax_kfc_switch_theme', [$this, 'handle_ajax_theme_switch_admin']);
+
+        // Suppress theme default header and footer blocks on front page so concept layouts have pure 100vw layout
+        add_filter('render_block', [$this, 'filter_theme_template_parts'], 10, 2);
+    }
+
+    public function filter_theme_template_parts($block_content, $block) {
+        if ((is_front_page() || is_home()) && isset($block['blockName']) && $block['blockName'] === 'core/template-part') {
+            $slug = $block['attrs']['slug'] ?? '';
+            if (in_array($slug, ['header', 'footer', 'main-header'], true)) {
+                return '';
+            }
+        }
+        return $block_content;
     }
 
     public function inject_homepage_fullwidth_styles() {
         if (is_front_page() || is_home()) {
             ?>
             <style id="kfc-fullwidth-reset">
-                html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
+                html, body {
+                    overflow-x: hidden !important;
+                    width: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                /* Hide theme default header, footer, title and featured image on homepage */
+                body.home header.wp-block-template-part,
+                body.home footer.wp-block-template-part,
+                body.home .wp-block-template-part,
                 body.home .wp-block-post-title,
                 body.home .entry-title,
-                body.home h1.wp-block-post-title { display: none !important; }
+                body.home h1.wp-block-post-title,
+                body.home .wp-block-post-featured-image {
+                    display: none !important;
+                }
+                /* Remove theme container margins and constraints */
+                body.home main.wp-block-group,
+                body.home main.wp-block-group > .wp-block-group.alignfull,
                 body.home .wp-site-blocks,
                 body.home .entry-content,
                 body.home .wp-block-post-content {
@@ -44,22 +72,25 @@ class KeysForCureAI {
                     width: 100% !important;
                     padding-left: 0 !important;
                     padding-right: 0 !important;
+                    padding-top: 0 !important;
+                    padding-bottom: 0 !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                    margin-top: 0 !important;
+                    margin-bottom: 0 !important;
+                }
+                body.home .wp-block-post-content > *,
+                body.home .is-layout-constrained > * {
+                    max-width: 100% !important;
+                    width: 100% !important;
                     margin-left: 0 !important;
                     margin-right: 0 !important;
                 }
-                body.home .wp-block-post-content > * {
-                    max-width: 100% !important;
-                }
-                body.home .is-layout-constrained > * {
-                    max-width: 100% !important;
-                }
                 .kfc-fullbleed {
-                    width: 100vw !important;
-                    position: relative !important;
-                    left: 50% !important;
-                    right: 50% !important;
-                    margin-left: -50vw !important;
-                    margin-right: -50vw !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
                     box-sizing: border-box !important;
                 }
             </style>
