@@ -826,25 +826,25 @@ class KeysForCureAI {
         $active_concept = (int) get_option('kfc_active_theme_concept', 1);
         $concepts = [
             1 => [
-                'name'  => 'Concept 1: Symphonic Prestige',
-                'desc'  => 'Editorial Gala Magazine Layout (Sphinx & London Music Fund)',
-                'pill'  => 'Classical Elegance',
-                'bg'    => '#0B192C',
+                'name'  => 'Concept 1: London Music Fund Gala',
+                'desc'  => 'Prestigious Midnight & Gold Gala Editorial (Sphinx & London Music Fund)',
+                'pill'  => 'Gala Elegance',
+                'bg'    => '#090D16',
                 'color' => '#C5A059'
             ],
             2 => [
-                'name'  => 'Concept 2: Harmonies of Hope',
-                'desc'  => 'Split Hero & 3-Column Campaign Grid (Playing for Change & El Sistema)',
-                'pill'  => 'Youthful Energy',
+                'name'  => 'Concept 2: Playing For Change Youth Movement',
+                'desc'  => 'Vibrant Cobalt & Amber Asymmetric Split Hero (Playing For Change & El Sistema)',
+                'pill'  => 'Youth Movement',
                 'bg'    => '#0052CC',
-                'color' => '#FFC700'
+                'color' => '#F59E0B'
             ],
             3 => [
-                'name'  => 'Concept 3: Nordic Minimalist',
-                'desc'  => 'Architectural Chronology Table (Live Music Now & Nordoff Robbins)',
-                'pill'  => 'Modern Impact',
+                'name'  => 'Concept 3: Nordoff & Robbins Clinical Humanism',
+                'desc'  => 'Scandinavian Architectural Minimalism & Music Therapy (Nordoff and Robbins)',
+                'pill'  => 'Clinical Wellbeing',
                 'bg'    => '#18181B',
-                'color' => '#2563EB'
+                'color' => '#0D9488'
             ]
         ];
 
