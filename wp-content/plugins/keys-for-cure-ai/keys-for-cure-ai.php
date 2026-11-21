@@ -18,6 +18,8 @@ class KeysForCureAI {
 
     public function __construct() {
         add_action('rest_api_init', [$this, 'register_routes']);
+        add_action('wp_head', [$this, 'inject_homepage_fullwidth_styles']);
+        add_filter('the_content', [$this, 'filter_homepage_content'], 1);
         add_action('wp_footer', [$this, 'render_public_chat_widget']);
         add_action('admin_menu', [$this, 'register_admin_menu']);
         add_action('admin_post_kfc_switch_theme', [$this, 'handle_admin_theme_switch']);
@@ -25,6 +27,51 @@ class KeysForCureAI {
         // Native admin-ajax handlers for 100% reliable dashboard operations
         add_action('wp_ajax_kfc_admin_chat', [$this, 'handle_ajax_admin_chat']);
         add_action('wp_ajax_kfc_switch_theme', [$this, 'handle_ajax_theme_switch_admin']);
+    }
+
+    public function inject_homepage_fullwidth_styles() {
+        if (is_front_page() || is_home()) {
+            ?>
+            <style id="kfc-fullwidth-reset">
+                html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
+                body.home .wp-block-post-title,
+                body.home .entry-title,
+                body.home h1.wp-block-post-title { display: none !important; }
+                body.home .wp-site-blocks,
+                body.home .entry-content,
+                body.home .wp-block-post-content {
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                }
+                body.home .wp-block-post-content > * {
+                    max-width: 100% !important;
+                }
+                body.home .is-layout-constrained > * {
+                    max-width: 100% !important;
+                }
+                .kfc-fullbleed {
+                    width: 100vw !important;
+                    position: relative !important;
+                    left: 50% !important;
+                    right: 50% !important;
+                    margin-left: -50vw !important;
+                    margin-right: -50vw !important;
+                    box-sizing: border-box !important;
+                }
+            </style>
+            <?php
+        }
+    }
+
+    public function filter_homepage_content($content) {
+        if (is_front_page()) {
+            remove_filter('the_content', 'wpautop');
+        }
+        return $content;
     }
 
     /* =========================================================================
